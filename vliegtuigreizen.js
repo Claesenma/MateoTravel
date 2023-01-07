@@ -271,9 +271,16 @@ function show_results(data, munteenheid) {
   results_div = document.getElementById("results-div");
   results_div.replaceChildren();
 
-  note = document.createElement("p");
-  note.innerHTML = "*De weergegeven tijden geven de lokale tijd aan op de weergegeven plaatsen.";
-  results_div.appendChild(note);
+  if (data["data"].length > 0) {
+    note = document.createElement("p");
+    note.innerHTML = "*De weergegeven tijden geven de lokale tijd aan op de weergegeven plaatsen.";
+    results_div.appendChild(note);
+  }
+  else {
+    note = document.createElement("p");
+    note.innerHTML = "Geen resultaten gevonden.";
+    results_div.appendChild(note);
+  }
 
   for (result in data["data"]) {
     witregel = document.createElement("br");
