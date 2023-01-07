@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="nl" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>MateoTravel - Vliegtuigreizen</title>
+    <link rel="icon" href="images/icon.png">
+    <link rel="stylesheet" href="vliegtuigreizen.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+
+    <img class= "img1" src="images/vliegtuig3.jpg" alt="">
+    <br><br><br>
+    <div class="title_div">
+      <h1>Vliegtuigreizen</h1>
+    </div>
+    <br><br>
+
+    <div class="search">
+      <div class="div2" id="vertrekplaats-div">
+        <span>Vertrekplaats</span>
+        <br><br>
+        <input placeholder="Vertrekplaats" oninput="add_input_options()" id="vertrekplaats-input" onfocus="show_input_options()" onblur="hide_input_options()" type="text" name="" value="" class="plaats_input">
+      </div>
+
+      <div class="div2" id="bestemming-div">
+        <span>Bestemming</span>
+        <br><br>
+        <input placeholder="Bestemming" oninput="add_input_options('bestemming')" id="bestemming-input" onfocus="show_input_options('bestemming')" onblur="hide_input_options('bestemming')" type="text" name="" value="" class="plaats_input">
+      </div>
+      <div id="datum-div" class="datum-div div2">
+        <span>Datum</span>
+        <br><br>
+        <input type="date" id="date-input" name="" value="">
+      </div>
+      <div id ="passagiers-div" class= "div2">
+        <span>Passagiers</span>
+        <br>
+
+        <div id ="volwassenen-div" class= "div2">
+          <p>Volwassenen (12+)</p><br>
+          <input oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" min="0" type="number" id="volwassenen-input" class="passagiers-input" name="" value="1">
+        </div>
+        <div id ="kinderen-div" class= "div2">
+          <p>Kinderen (2-11)</p><br>
+          <input oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" min="0" type="number" id="kinderen-input" class="passagiers-input" name="" value="0">
+        </div>
+        <div id ="baby-div" class= "div2">
+          <p>Baby's (0-1)</p><br>
+          <input oninput="this.value = !!this.value && Math.abs(this.value) >= 0 ? Math.abs(this.value) : null" min="0" type="number" id="baby-input" class="passagiers-input" name="" value="0">
+        </div>
+      </div>
+
+      <div id="type-div" class="div2">
+        <span>Type</span><br><br>
+        <select name="" id="type-dropdown">
+          <option value="M">Economy</option>
+          <option value="W">Economy Premium</option>
+          <option value="C">Businness</option>
+          <option value="F">First Class</option>
+        </select>
+      </div>
+
+      <div id="sorteren-div" class="div2">
+        <span>Sorteren op</span><br><br>
+        <select name="" id="sort-dropdown">
+          <option value="price">Prijs</option>
+          <option value="quality">Beste</option>
+          <option value="duration">Snelheid</option>
+          <option value="date">Datum</option>
+        </select>
+      </div>
+      <div id="munteenheid-div" class="div2">
+        <span>Munteenheid</span><br><br>
+        <select name="" id="currency-dropdown">
+          <option value="EUR">EUR (€)</option>
+          <option value="USD">USD ($)</option>
+          <option value="GBP">GBP (£)</option>
+        </select>
+      </div>
+      <div id="stops-div" class="div2">
+        <span>Stops</span><br><br>
+        <select name="" id="stops-dropdown">
+          <option value="0">Rechtstreeks</option>
+          <option value="1">Max 1 stop</option>
+          <option value="2">Max 2 stops</option>
+          <option value="3">Max 3 stops</option>
+          <option value="4">Max 4 stops</option>
+          <option value="5">Max 5 stops</option>
+        </select>
+      </div>
+
+      <br>
+      <div class="zoeken-div">
+        <a class="a" onclick="zoeken()" >Zoeken ></a>
+      </div>
+
+    </div>
+
+    <br><br><br><br>
+    <div id="results-div">
+      <br><br><br>
+    </div>
+    <br><br><br>
+
+
+    <div class="bottom-div">
+      <p class="title1-1">© 2022 Mateo Claesen.</p>
+      <p class="title2">(gemaakt met de gegevens van "<a class="a1" href="https://www.kiwi.com">www.kiwi.com</a>")</p>
+    </div>
+    <div class="menu"><h1 class="title">MateoTravel</h1></div>
+
+    <script src="vliegtuigreizen.js"></script>
+  </body>
+</html>
