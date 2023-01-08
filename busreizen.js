@@ -701,7 +701,7 @@ function show_details(data, id, munteenheid) {
       witregel = document.createElement("br");
       text_div2.appendChild(witregel);
       route_text_ = document.createElement("p");
-      route_text_.innerHTML = seconds_to_hours(duur) + " in het vliegtuig ("+ airline +")";
+      route_text_.innerHTML = seconds_to_hours(duur) + " in de bus ("+ airline +")";
       text_div2.appendChild(route_text_);
 
       witregel = document.createElement("br");
