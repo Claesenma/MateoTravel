@@ -1,0 +1,79 @@
+* {padding: 0;margin: 0;}
+body {background-color: #dfdfdf;}
+.input-field {position:absolute;top:0px;left:0px;width:183px;width:180px\9;#width:180px;height:23px; height:21px\9;#height:18px;border:1px solid #556;}
+.dropdown-field {position:absolute;top:0px;left:0px;width:200px; height:25px;line-height:20px;margin:0;padding:0;}
+.dropdown-input-field-div {position: relative; width: 200px; height: 25px; border: 0; padding: 0; margin: 0;}
+div {height:auto;}
+div span {font-weight: bold; margin-left: 20px; font-size: 1.2rem; color: #4d4d4d;}
+h2 {font-weight: bold; font-size: 1.75rem; color: #4d4d4d; margin-bottom: 15%;}
+.a {font-weight: bold; font-size: 1.5rem; color: white; padding: 10px; width: 10%; background-color: #4d4d4d; text-decoration: none; border-radius: 10px;}
+.a1 {color: white;}
+.a:hover {background-color: #3e3e3e;}
+.title2 {font-size: 1.5rem; padding: 10px 0 0 10px; margin: 0px; color: white;}
+.div2 {height: 100px; display: inline-block;}
+.title_div {font-size: 1.75rem; text-align: center; background-color: #dfdfdf;}
+#vertrekplaats-div {width: 260px;}
+#bestemming-div {width: 260px;}
+
+.menu {
+  border-bottom-style: solid;
+  width: 100%;
+  height: 46px;
+  position: fixed;
+  margin: 0;
+  top:0;
+  left:0;
+  background-color: #4d4d4d;
+}
+
+.title {font-weight: bold; font-size: 1.75rem; padding: 10px 0px 10px 30px; margin: 0; text-decoration: none; color: white}
+.img1 {width: 100%; border: none; margin: 0; margin-bottom: 20px; position: relative; top: 40px;}
+.title1-1 {color: white; font-weight: bold; font-size: 1.75rem; padding: 10px 0 0px 10px; margin: 0; text-decoration: none;}
+.bottom-div {position: relative; margin: 20px 0 0 0; background-color: #4d4d4d; text-align: center; height: auto; border-top-style: solid;}
+.search {text-align: center; background: #fc0;}
+
+
+.plaats_input {font-size: 1.75rem; border-radius: 10px; margin-left: 20px; display: inline-block; width: 220px; height: 40px;}
+
+.zoeken-div {height: 50px; width: 100%; text-align: center; background: #fc0;}
+
+#vertrekplaats-options-div {}
+#bestemming-options-div {}
+#date-input {margin-left: 20px; height: 40px; border-radius: 10px; font-size: 1.25rem; display: inline-block;}
+.passagiers-input {font-size: 1rem; padding-left: 10px; width: 40px; margin-left: 40px; height: 30px; border-radius: 10px;}
+#passagiers-div span {}
+#passagiers-div div p {font-weight: bold; margin-left: 20px; font-size: 1rem; color: #4d4d4d;}
+select {margin-left: 20px; font-size: 1rem; height: 40px; border-radius: 10px;}
+#overal-option p {font-weight: bold; text-decoration: underline;}
+
+.price {font-weight: bold; font-size: 1.5rem; color: #4d4d4d; padding: 10px; background-color: #fc0; text-decoration: none; border-radius: 10px; margin: 10px 0;}
+.det_btn {padding: 10px 3%; background-color: #dfdfdf; color: black; border-radius: 10px; font-family: sans-serif;}
+.det_btn:hover {background-color: #d1d0d0;}
+
+.date_btn {margin-left: 1%; margin-right: 1%; font-weight: bold; font-size: 1.5rem; color: #4d4d4d; padding: 10px; width: 10%; background-color: #fc0; text-decoration: none; border-radius: 10px;}
+.date_btn:hover {background-color: #e9bb01;}
+.date_btn2 {margin-left: 1%; margin-right: 1%; font-weight: bold; font-size: 1.5rem; color: #4d4d4d; padding: 10px; width: 10%; background-color: white; text-decoration: none; border-radius: 10px;}
+
+
+.options-div {
+  background: white;
+  border-style: solid;
+  margin-left: 20px;
+  overflow-y:auto;
+  position: absolute;
+  width: 220px;
+  text-align: left;
+}
+
+#results-div {text-align: center;}
+
+.list-item {
+  color: black;
+}
+.list-item:hover {
+  color: blue;
+}
+
+ul {
+  list-style: none;
+}
