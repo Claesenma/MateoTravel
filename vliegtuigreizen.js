@@ -242,40 +242,105 @@ function zoeken() {
 
 // get flights
 function get_flights(ve, be, da, vo, ki, ba, ty, so, mu, st) {
-  var headers2 = {"apikey": "sQn-e3Rt2AEpL1z1XmSNL2oEPYf2mJO2"}
-  if (be=="OVERAL") {
-    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
+  if (da.includes("/")) {
+    var date = da.split("/")
+    var da2 = date[2] + "-" + date[1] + "-" + date[0]
+  }
+
+  var error = false;
+  var today = new Date();
+  var dag = today.getDate().toString().padStart(2, '0');
+  var maand = (today.getMonth() + 1).toString().padStart(2, '0');
+  var jaar2 = today.getFullYear() + 3;
+  var jaar = today.getFullYear();
+
+  var datum = new Date(da2)
+  var datum2 = new Date(jaar2 + "-" + maand + "-" + dag)
+  var today2 = new Date(jaar + "-" + maand + "-" + dag);
+
+  if (today2 > datum) {
+    error = true;
+    error_message = "Die datum ligt in het verlenden."
+  }
+  if (datum2 < datum) {
+    error = true;
+    error_message = "Die datum ligt te ver in de toekomst."
+  }
+
+
+  if (error == true) {
+    alert(error_message);
   }
   else {
-    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
-  }
-  console.log(url)
+    var headers2 = {"apikey": "sQn-e3Rt2AEpL1z1XmSNL2oEPYf2mJO2"}
 
-  fetch(url, {headers: headers2})
-  .then(response => {
-  if (!response.ok) {throw new Error(`Request failed with status ${response.status}`)}
-    return response.json()
-    document.write("error")
-  })
-  .then(data => {
-    console.log(data);
-    window.details = false;
-    window.details_num = 0;
-    show_results(data, mu);
+    if (be=="OVERAL") {
+      var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
+    }
+    else {
+      var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
+    }
+    console.log(url)
+
+    fetch(url, {headers: headers2})
+    .then(response => {
+    if (!response.ok) {throw new Error(`Request failed with status ${response.status}`)}
+      return response.json()
+      document.write("error")
     })
-    .catch(error => console.log(error))
+    .then(data => {
+      console.log(data);
+      window.details = false;
+      window.details_num = 0;
+      show_results(data, ve, be, da, vo, ki, ba, ty, so, mu, st);
+      })
+      .catch(error => console.log(error))
+  }
 }
 
 // Show Results
-function show_results(data, munteenheid) {
+function show_results(data, ve, be, da, vo, ki, ba, ty, so, munteenheid, st) {
   results_div = document.getElementById("results-div");
   results_div.replaceChildren();
+
+  var dat = da.split("/");
+  var da2 = dat[2] + "-" + dat[1] + "-" + dat[0];
+
+  for (n = 0; n < 7; n++) {
+    var date = new Date(da2);
+    date.setDate(date.getDate() - 3 + n);
+    var dag = date.getDate().toString().padStart(2, '0');
+    var maand = (date.getMonth() + 1).toString().padStart(2, '0');
+    var jaar = date.getFullYear();
+    var datum3 = dag + "/" + maand + "/" + jaar;
+
+    var btn = document.createElement("a");
+    if (n == 3) {
+      btn.classList.toggle("date_btn2");
+    }
+    else {
+      btn.classList.toggle("date_btn");
+    }
+
+    btn.addEventListener('click', function(){
+      get_flights(ve, be, this.innerHTML, vo, ki, ba, ty, so, munteenheid, st);
+    });
+    btn.innerHTML = datum3;
+    results_div.appendChild(btn);
+  }
+  witregel = document.createElement("br");
+  results_div.appendChild(witregel);
+  witregel = document.createElement("br");
+  results_div.appendChild(witregel);
+  witregel = document.createElement("br");
+  results_div.appendChild(witregel);
 
   if (data["data"].length > 0) {
     note = document.createElement("p");
     note.innerHTML = "*De weergegeven tijden geven de lokale tijd aan op de weergegeven plaatsen.";
     results_div.appendChild(note);
   }
+
   else {
     note = document.createElement("p");
     note.innerHTML = "Geen resultaten gevonden.";
@@ -299,6 +364,9 @@ function show_results(data, munteenheid) {
       if (airline in airlines_data_dict) {
         var airline2 = airlines_data_dict[airline];
       }
+      else {
+        airline2 = airline;
+      }
       airlines_list.push(airline2);
     }
 
@@ -312,21 +380,21 @@ function show_results(data, munteenheid) {
     if (data["data"][result]["airlines"].length == 1) {
       airlines_logo = document.createElement("img");
       airlines_logo.src = data["data"][result]["airlines"][0] +".png";
-      airlines_logo.alt = airlines_data_dict[data["data"][result]["airlines"][0]];
+      airlines_logo.alt = airlines_list[0];
       airlines_logo.style = "width:60%;margin-left: 15%;align:left;";
       logo_div.appendChild(airlines_logo);
     }
     else {
       airlines_logo = document.createElement("img");
       airlines_logo.src = data["data"][result]["airlines"][0] +".png";
-      airlines_logo.alt = airlines_data_dict[data["data"][result]["airlines"][0]];
+      airlines_logo.alt = airlines_list[0];
       airlines_logo.style = "width:35%;margin-left: 25%;align:left;";
       logo_div.appendChild(airlines_logo);
       witregel = document.createElement("br");
       logo_div.appendChild(witregel);
       airlines_logo = document.createElement("img");
       airlines_logo.src = data["data"][result]["airlines"][1] +".png";
-      airlines_logo.alt = airlines_data_dict[data["data"][result]["airlines"][1]];
+      airlines_logo.alt = airlines_list[1];
       airlines_logo.style = "width:35%;margin-left: 25%;align:left;";
       logo_div.appendChild(airlines_logo);
     }
@@ -409,7 +477,7 @@ function show_results(data, munteenheid) {
     vertrekplaats_naam_text.innerHTML = window.airports_data_dict[data["data"][result]["flyFrom"]]["name"];
     vertrekplaats_div.appendChild(vertrekplaats_naam_text);
     vertrekplaats_stad_text = document.createElement("p");
-    vertrekplaats_stad_text.innerHTML = data["data"][result]["cityFrom"] + ", " + window.airports_data_dict[data["data"][result]["flyFrom"]]["country"];
+    vertrekplaats_stad_text.innerHTML = data["data"][result]["cityFrom"] + ", " + data["data"][result]["countryFrom"]["name"];
     vertrekplaats_div.appendChild(vertrekplaats_stad_text);
 
     plane_img = document.createElement("img");
@@ -449,7 +517,7 @@ function show_results(data, munteenheid) {
     bestemming_naam_text.innerHTML = window.airports_data_dict[data["data"][result]["flyTo"]]["name"];
     bestemming_div.appendChild(bestemming_naam_text);
     bestemming_stad_text = document.createElement("p");
-    bestemming_stad_text.innerHTML = data["data"][result]["cityTo"] + ", " + window.airports_data_dict[data["data"][result]["flyTo"]]["country"];
+    bestemming_stad_text.innerHTML = data["data"][result]["cityTo"] + ", " + data["data"][result]["countryTo"]["name"];
     bestemming_div.appendChild(bestemming_stad_text);
 
     witregel = document.createElement("br");
@@ -600,15 +668,30 @@ function show_details(data, id, munteenheid) {
       vlucht_text_vertrek_datum.innerHTML = vertrek_datum;
       text_div2.appendChild(vlucht_text_vertrek_datum);
 
+      if (result2["flyFrom"] in window.airports_data_dict) {
+        var flight_text1 = result2["flyFrom"] + ", " + result2["cityFrom"] + ", " + window.airports_data_dict[result2["flyFrom"]]["country"];
+      }
+      else {
+        var flight_text1 = result2["flyFrom"] + ", " + result2["cityFrom"];
+      }
+
       vlucht_text_vertrek_plaats = document.createElement("p");
       vlucht_text_vertrek_plaats.style = "font-weight: bold;";
-      vlucht_text_vertrek_plaats.innerHTML = result2["flyFrom"] + ", " + result2["cityFrom"] + ", " + window.airports_data_dict[result2["flyFrom"]]["country"];
+      vlucht_text_vertrek_plaats.innerHTML = flight_text1;
       text_div2.appendChild(vlucht_text_vertrek_plaats);
+
+      var airline1 = result2["airline"];
+      if (airline1 in airlines_data_dict) {
+        airline = airlines_data_dict[airline1];
+      }
+      else {
+        airline = airline1;
+      }
 
       witregel = document.createElement("br");
       text_div2.appendChild(witregel);
       route_text_ = document.createElement("p");
-      route_text_.innerHTML = seconds_to_hours(duur) + " in het vliegtuig ("+ airlines_data_dict[result2["airline"]] +", vluchtnummer: "+ result2["airline"] + result2["flight_no"] +")";
+      route_text_.innerHTML = seconds_to_hours(duur) + " in het vliegtuig ("+ airline +")";
       text_div2.appendChild(route_text_);
 
       witregel = document.createElement("br");
@@ -618,9 +701,16 @@ function show_details(data, id, munteenheid) {
       vlucht_text_aankomst_datum.innerHTML = aankomst_datum;
       text_div2.appendChild(vlucht_text_aankomst_datum);
 
+      if (result2["flyTo"] in window.airports_data_dict) {
+        var flight_text2 = result2["flyTo"] + ", " + result2["cityTo"] + ", " + window.airports_data_dict[result2["flyTo"]]["country"];
+      }
+      else {
+        var flight_text2 = result2["flyTo"] + ", " + result2["cityTo"];
+      }
+
       vlucht_text_aankomst_plaats = document.createElement("p");
       vlucht_text_aankomst_plaats.style = "font-weight: bold;";
-      vlucht_text_aankomst_plaats.innerHTML = result2["flyTo"] + ", " + result2["cityTo"] + ", " + window.airports_data_dict[result2["flyTo"]]["country"];
+      vlucht_text_aankomst_plaats.innerHTML = flight_text2;
       text_div2.appendChild(vlucht_text_aankomst_plaats);
       witregel = document.createElement("br");
       text_div2.appendChild(witregel);
@@ -685,9 +775,6 @@ function show_details(data, id, munteenheid) {
   }
 }
 
-//function add_input_options2() {
-//  add_input_options("bestemming");
-//}
 
 // delay function
 function delay(time) {
@@ -726,9 +813,4 @@ async function show1() {
   }
 }
 
-
-
 show1();
-
-//var input = document.getElementById("vertrekplaats-dropdown-input-field");
-//console.log(input.value)
