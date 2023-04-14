@@ -472,21 +472,21 @@ function show_results(data, munteenheid) {
     // heen div
     if (heen_airlines_list.length == 1) {
       airlines_logo = document.createElement("img");
-      airlines_logo.src = "Airline Logos/Square/"+ heen_route[0]["airline"] +".png";
+      airlines_logo.src = heen_route[0]["airline"] +".png";
       airlines_logo.alt = heen_airlines_list[0];
       airlines_logo.style = "width:50%;margin-left: 15%;align:left;";
       logo_div1.appendChild(airlines_logo);
     }
     else {
       airlines_logo = document.createElement("img");
-      airlines_logo.src = "Airline Logos/Square/"+ heen_route[0]["airline"] +".png";
+      airlines_logo.src = heen_route[0]["airline"] +".png";
       airlines_logo.alt = heen_airlines_list[0];
       airlines_logo.style = "width:30%;margin-left: 25%;align:left;";
       logo_div1.appendChild(airlines_logo);
       witregel = document.createElement("br");
       logo_div1.appendChild(witregel);
       airlines_logo = document.createElement("img");
-      airlines_logo.src = "Airline Logos/Square/"+ heen_route[1]["airline"] +".png";
+      airlines_logo.src = heen_route[1]["airline"] +".png";
       airlines_logo.alt = heen_airlines_list[1];
       airlines_logo.style = "width:30%;margin-left: 25%;align:left;";
       logo_div1.appendChild(airlines_logo);
@@ -603,21 +603,21 @@ function show_results(data, munteenheid) {
 
     if (terug_airlines_list.length == 1) {
       airlines_logo = document.createElement("img");
-      airlines_logo.src = "Airline Logos/Square/"+ terug_route[0]["airline"] +".png";
+      airlines_logo.src = terug_route[0]["airline"] +".png";
       airlines_logo.alt = terug_airlines_list[0];
       airlines_logo.style = "width:50%;margin-left: 15%;align:left;";
       logo_div2.appendChild(airlines_logo);
     }
     else {
       airlines_logo = document.createElement("img");
-      airlines_logo.src = "Airline Logos/Square/"+ terug_route[0]["airline"] +".png";
+      airlines_logo.src = terug_route[0]["airline"] +".png";
       airlines_logo.alt = terug_airlines_list[0];
       airlines_logo.style = "width:30%;margin-left: 25%;align:left;";
       logo_div2.appendChild(airlines_logo);
       witregel = document.createElement("br");
       logo_div2.appendChild(witregel);
       airlines_logo = document.createElement("img");
-      airlines_logo.src = "Airline Logos/Square/"+ terug_route[1]["airline"] +".png";
+      airlines_logo.src = terug_route[1]["airline"] +".png";
       airlines_logo.alt = terug_airlines_list[1];
       airlines_logo.style = "width:30%;margin-left: 25%;align:left;";
       logo_div2.appendChild(airlines_logo);
@@ -1038,7 +1038,7 @@ function show_details(data, id, munteenheid) {
 
       logo_img = document.createElement("img");
       logo_img.style = "width: 60%; margin: 70px 25px 17px 25px;";
-      logo_img.src = "Airline Logos/Square/"+ result2["airline"] + ".png";
+      logo_img.src = result2["airline"] + ".png";
       logo_img.alt = airlines_data_dict[result2["airline"]];
       heen_logo_div.appendChild(logo_img);
 
@@ -1190,7 +1190,7 @@ function show_details(data, id, munteenheid) {
 
       logo_img = document.createElement("img");
       logo_img.style = "width: 60%; margin: 70px 25px 17px 25px;";
-      logo_img.src = "Airline Logos/Square/"+ result2["airline"] + ".png";
+      logo_img.src = result2["airline"] + ".png";
       logo_img.alt = airlines_data_dict[result2["airline"]];
       terug_logo_div.appendChild(logo_img);
 
