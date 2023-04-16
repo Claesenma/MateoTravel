@@ -206,7 +206,7 @@ function zoeken() {
 
   //console.log(overnachtingen1);
   //console.log(overnachtingen2 > overnachtingen1);//overnachtingen2);
-  if (overnachtingen1 > overnachtingen2) {
+  if (+overnachtingen1 > +overnachtingen2) {
     error = true;
     error_message =  "Het minimale aantal overnachtingen kan niet groter zijn dat het maximale aantal overnachtingen!"
   }
@@ -266,7 +266,13 @@ function get_flights(ve, be, da1, da2, ov1, ov2, mu, st) {
   var headers2 = {"apikey": "sQn-e3Rt2AEpL1z1XmSNL2oEPYf2mJO2"}
 
   //Ryanair Only
-  var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=False&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=10&locale=nl";
+  if (be == "OVERAL") {
+    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=False&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=100&locale=nl";
+  }
+  else {
+    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=False&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=10&locale=nl";
+  }
+  
   console.log(url)
 
   fetch(url, {headers: headers2})
@@ -285,7 +291,13 @@ function get_flights(ve, be, da1, da2, ov1, ov2, mu, st) {
   .catch(error => console.log(error))
 
   //Without Ryanair
-  var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=True&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=200&locale=nl";
+  if (be == "OVERAL") {
+    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=True&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=1000&locale=nl";
+  }
+  else {
+    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=True&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=200&locale=nl";
+  }
+  
   console.log(url)
 
   fetch(url, {headers: headers2})
