@@ -211,6 +211,9 @@ function zoeken() {
   var terug_date = terug_datum_input.split("-");
   var terug_datum = terug_date[2] + "/" + terug_date[1] + "/" + terug_date[0];
 
+  var tijd1 = document.getElementById("time-input1").value;
+  var tijd2 = document.getElementById("time-input2").value;
+
   var overnachtingen1 = document.getElementById("nights-input1").value;
   var overnachtingen2 = document.getElementById("nights-input2").value;
   console.log(overnachtingen1);
@@ -242,6 +245,7 @@ function zoeken() {
     error = true;
     error_message =  "Je hebt geen eerste datum ingegeven!"
   }
+
   else {
     if (terug_datum_input == "" || terug_datum_input == undefined || terug_datum_input == null) {
       error = true;
@@ -261,6 +265,24 @@ function zoeken() {
           error = true;
           error_message =  "De tweede datum die je hebt ingegeven, ligt te ver in de toekomst."
         }
+      }
+    }
+  }
+
+  if (tijd1 == "" || tijd1 == undefined || tijd1 == null) {
+    error = true;
+    error_message =  "Je hebt geen eerste tijd ingegeven!"
+  }
+
+  else {
+    if (tijd2 == "" || tijd2 == undefined || tijd2 == null) {
+      error = true;
+      error_message =  "Je hebt geen tweede tijd ingegeven!"
+    }
+    else {
+      if (tijd1 >= tijd2) {
+        error = true;
+        error_message =  "De eerste tijd die je hebt ingegeven kan niet later zijn dan de tweede!"
       }
     }
   }
@@ -285,12 +307,12 @@ function zoeken() {
     alert(error_message);
   }
   else {
-    get_flights(vertrekplaats, bestemming, vertrek_datum, terug_datum, overnachtingen1, overnachtingen2, munteenheid, stops);
+    get_flights(vertrekplaats, bestemming, vertrek_datum, terug_datum, tijd1, tijd2, overnachtingen1, overnachtingen2, munteenheid, stops);
   }
 }
 
 // get flights
-function get_flights(ve, be, da1, da2, ov1, ov2, mu, st) {
+function get_flights(ve, be, da1, da2, t1, t2, ov1, ov2, mu, st) {
   if (be.length ==3) {
     be= "airport:"+be
   }
@@ -298,17 +320,16 @@ function get_flights(ve, be, da1, da2, ov1, ov2, mu, st) {
   if (ve.length ==3) {
     ve= "airport:"+ve
   }
-  
+
   var headers2 = {"apikey": "sQn-e3Rt2AEpL1z1XmSNL2oEPYf2mJO2"}
 
   //Ryanair Only
   if (be == "OVERAL") {
-    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=False&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=100&locale=nl";
+    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&dtime_from="+t1+"&dtime_to="+t2+"&atime_from="+t1+"&atime_to="+t2+"&ret_dtime_from="+t1+"&ret_dtime_to="+t2+"&ret_atime_from="+t1+"&ret_atime_to="+t2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=False&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=100&locale=nl";
   }
   else {
-    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=False&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=10&locale=nl";
+    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&dtime_from="+t1+"&dtime_to="+t2+"&atime_from="+t1+"&atime_to="+t2+"&ret_dtime_from="+t1+"&ret_dtime_to="+t2+"&ret_atime_from="+t1+"&ret_atime_to="+t2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=False&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=10&locale=nl";
   }
-  
   console.log(url)
 
   fetch(url, {headers: headers2})
@@ -328,12 +349,12 @@ function get_flights(ve, be, da1, da2, ov1, ov2, mu, st) {
 
   //Without Ryanair
   if (be == "OVERAL") {
-    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=True&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=1000&locale=nl";
+    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da1+"&date_to="+da2+"&dtime_from="+t1+"&dtime_to="+t2+"&atime_from="+t1+"&atime_to="+t2+"&ret_dtime_from="+t1+"&ret_dtime_to="+t2+"&ret_atime_from="+t1+"&ret_atime_to="+t2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=True&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=1000&locale=nl";
   }
   else {
-    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=True&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=200&locale=nl";
+    var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da1+"&date_to="+da2+"&return_from="+da1+"&return_to="+da2+"&dtime_from="+t1+"&dtime_to="+t2+"&atime_from="+t1+"&atime_to="+t2+"&ret_dtime_from="+t1+"&ret_dtime_to="+t2+"&ret_atime_from="+t1+"&ret_atime_to="+t2+"&nights_in_dst_from="+ov1+"&nights_in_dst_to="+ov2+"&max_stopovers="+st+"&select_airlines=FR&select_airlines_exclude=True&flight_type=round&adults=1&children=0&infants=0&selected_cabins=M&curr="+mu+"&price_from=0&price_to=10000&conn_on_diff_airport=0&vehicle_type=aircraft&ret_from_diff_airport=0&ret_to_diff_airport=0&sort=price&limit=200&locale=nl";
   }
-  
+
   console.log(url)
 
   fetch(url, {headers: headers2})
@@ -360,7 +381,7 @@ function get_flights(ve, be, da1, da2, ov1, ov2, mu, st) {
   })
   .catch(error => console.log(error))
 
-}
+}  
 
 // Combine dictionaries
 function createObj(obj1, obj2){
