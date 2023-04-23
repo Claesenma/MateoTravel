@@ -275,10 +275,10 @@ function get_flights(ve, be, da, vo, ki, ba, ty, so, mu, st) {
     var headers2 = {"apikey": "sQn-e3Rt2AEpL1z1XmSNL2oEPYf2mJO2"}
 
     if (be=="OVERAL") {
-      var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
+      var url = "https://tequila-api.kiwi.com/v2/search?fly_from=airport:"+ve+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
     }
     else {
-      var url = "https://tequila-api.kiwi.com/v2/search?fly_from="+ve+"&fly_to="+be+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
+      var url = "https://tequila-api.kiwi.com/v2/search?fly_from=airport:"+ve+"&fly_to=airport:"+be+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
     }
     console.log(url)
 
