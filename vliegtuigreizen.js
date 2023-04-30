@@ -201,9 +201,12 @@ function zoeken() {
   var vertrekplaats = document.getElementById("vertrekplaats-input").value.toUpperCase().trim();
   var bestemming = document.getElementById("bestemming-input").value.toUpperCase().trim();
 
-  var datum_input = document.getElementById("date-input").value;
-  var date = datum_input.split("-")
-  var datum = date[2] + "/" + date[1] + "/" + date[0]
+  var datum_input = document.getElementById("date-input1").value;
+  var date = datum_input.split("-");
+  var datum = date[2] + "/" + date[1] + "/" + date[0];
+
+  var tijd1 = document.getElementById("time-input1").value;
+  var tijd2 = document.getElementById("time-input2").value;
 
   var volwassenen = document.getElementById("volwassenen-input").value;
   var kinderen = document.getElementById("kinderen-input").value;
@@ -222,18 +225,21 @@ function zoeken() {
   var jaar2 = today.getFullYear() + 3;
   var jaar = today.getFullYear();
 
-  var datum2 = new Date(jaar2 + "-" + maand + "-" + dag)
-  var datum_input2 = new Date(datum_input)
+  var datum2 = new Date(jaar2 + "-" + maand + "-" + dag);
+  var datum_input2 = new Date(datum_input);
+  //ar terug_datum_input2 = new Date(terug_datum_input);
   var today2 = new Date(jaar + "-" + maand + "-" + dag);
 
   if ((+volwassenen)+(+kinderen)+(+babys) > 9) {
     error = true;
     error_message =  "Er mogen maximaal 9 passagiers mee!"
   }
+
+
   if (datum_input == "" || datum_input == undefined || datum_input == null) {
-    error = true;
-    error_message =  "Je hebt geen datum ingegeven!"
-  }
+      error = true;
+      error_message =  "Je hebt geen datum ingegeven!"
+    }
   else {
     if (today2 > datum_input2) {
       error = true;
@@ -244,6 +250,25 @@ function zoeken() {
       error_message =  "De datum die je hebt ingegeven, ligt te ver in de toekomst."
     }
   }
+
+  if (tijd1 == "" || tijd1 == undefined || tijd1 == null) {
+    error = true;
+    error_message =  "Je hebt geen eerste tijd ingegeven!"
+  }
+
+  else {
+    if (tijd2 == "" || tijd2 == undefined || tijd2 == null) {
+      error = true;
+      error_message =  "Je hebt geen tweede tijd ingegeven!"
+    }
+    else {
+      if (tijd1 >= tijd2) {
+        error = true;
+        error_message =  "De eerste tijd die je hebt ingegeven kan niet later zijn dan de tweede!"
+      }
+    }
+  }
+
   if (vertrekplaats == bestemming) {
     error = true;
     error_message =  "De vertrekplaats en de bestemming kunnen niet hetzelfde zijn!"
@@ -264,36 +289,43 @@ function zoeken() {
     alert(error_message);
   }
   else {
-    get_flights(vertrekplaats, bestemming, datum, volwassenen, kinderen, babys, type, sort, munteenheid, stops);
+    get_flights(vertrekplaats, bestemming, datum, tijd1, tijd2, volwassenen, kinderen, babys, type, sort, munteenheid, stops);
   }
 }
 
 // get flights
-function get_flights(ve, be, da, vo, ki, ba, ty, so, mu, st) {
-  if (da.includes("/")) {
-    var date = da.split("/")
-    var da2 = date[2] + "-" + date[1] + "-" + date[0]
-  }
-
+function get_flights(ve, be, da, t1, t2, vo, ki, ba, ty, so, mu, st) {
   var error = false;
-  var today = new Date();
-  var dag = today.getDate().toString().padStart(2, '0');
-  var maand = (today.getMonth() + 1).toString().padStart(2, '0');
-  var jaar2 = today.getFullYear() + 3;
-  var jaar = today.getFullYear();
 
-  var datum = new Date(da2)
-  var datum2 = new Date(jaar2 + "-" + maand + "-" + dag)
-  var today2 = new Date(jaar + "-" + maand + "-" + dag);
+  //if (da1.includes("/")) {
+  //  var date = da1.split("/")
+  //  var da1 = date[2] + "-" + date[1] + "-" + date[0]
+  //}
 
-  if (today2 > datum) {
-    error = true;
-    error_message = "Die datum ligt in het verlenden."
-  }
-  if (datum2 < datum) {
-    error = true;
-    error_message = "Die datum ligt te ver in de toekomst."
-  }
+  //if (da2.includes("/")) {
+  //  var date = da2.split("/")
+  //  var da2 = date[2] + "-" + date[1] + "-" + date[0]
+  //}
+
+  //var error = false;
+  //var today = new Date();
+  //var dag = today.getDate().toString().padStart(2, '0');
+  //var maand = (today.getMonth() + 1).toString().padStart(2, '0');
+  //var jaar2 = today.getFullYear() + 3;
+  //var jaar = today.getFullYear();
+
+  //var datum = new Date(da2)
+  //var datum2 = new Date(jaar2 + "-" + maand + "-" + dag)
+  //var today2 = new Date(jaar + "-" + maand + "-" + dag);
+
+  //if (today2 > datum) {
+  //  error = true;
+  //  error_message = "Die datum ligt in het verlenden."
+  //}
+  //if (datum2 < datum) {
+  //  error = true;
+  //  error_message = "Die datum ligt te ver in de toekomst."
+  //}
 
 
   if (error == true) {
@@ -303,10 +335,10 @@ function get_flights(ve, be, da, vo, ki, ba, ty, so, mu, st) {
     var headers2 = {"apikey": "sQn-e3Rt2AEpL1z1XmSNL2oEPYf2mJO2"}
 
     if (be=="OVERAL") {
-      var url = "https://tequila-api.kiwi.com/v2/search?fly_from=airport:"+ve+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
+      var url = "https://tequila-api.kiwi.com/v2/search?fly_from=airport:"+ve+"&date_from="+da+"&date_to="+da+"&dtime_from="+t1+"&dtime_to="+t2+"&atime_from="+t1+"&atime_to="+t2+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
     }
     else {
-      var url = "https://tequila-api.kiwi.com/v2/search?fly_from=airport:"+ve+"&fly_to=airport:"+be+"&date_from="+da+"&date_to="+da+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&dtime_from=00:00&dtime_to=23:59&atime_from=00:00&atime_to=23:59&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
+      var url = "https://tequila-api.kiwi.com/v2/search?fly_from=airport:"+ve+"&fly_to=airport:"+be+"&date_from="+da+"&date_to="+da+"&dtime_from="+t1+"&dtime_to="+t2+"&atime_from="+t1+"&atime_to="+t2+"&flight_type=oneway&adults="+vo+"&children="+ki+"&infants="+ba+"&selected_cabins="+ty+"&curr="+mu+"&price_from=0&price_to=10000&stopover_from=01:00&stopover_to=23:59&max_stopovers="+st+"&conn_on_diff_airport=1&vehicle_type=aircraft&sort="+so+"&limit=30&locale=nl";
     }
     console.log(url)
 
@@ -320,14 +352,14 @@ function get_flights(ve, be, da, vo, ki, ba, ty, so, mu, st) {
       console.log(data);
       window.details = false;
       window.details_num = 0;
-      show_results(data, ve, be, da, vo, ki, ba, ty, so, mu, st);
+      show_results(data, ve, be, da, t1, t2, vo, ki, ba, ty, so, mu, st);
       })
       .catch(error => console.log(error))
   }
 }
 
 // Show Results
-function show_results(data, ve, be, da, vo, ki, ba, ty, so, munteenheid, st) {
+function show_results(data, ve, be, da, t1, t2, vo, ki, ba, ty, so, munteenheid, st) {
   results_div = document.getElementById("results-div");
   results_div.replaceChildren();
 
@@ -351,7 +383,7 @@ function show_results(data, ve, be, da, vo, ki, ba, ty, so, munteenheid, st) {
     }
 
     btn.addEventListener('click', function(){
-      get_flights(ve, be, this.innerHTML, vo, ki, ba, ty, so, munteenheid, st);
+      get_flights(ve, be, this.innerHTML, t1, t2, vo, ki, ba, ty, so, munteenheid, st);
     });
     btn.innerHTML = datum3;
     results_div.appendChild(btn);
