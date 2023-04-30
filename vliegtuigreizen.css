@@ -39,7 +39,7 @@ h2 {font-weight: bold; font-size: 1.75rem; color: #4d4d4d; margin-bottom: 15%;}
 
 #vertrekplaats-options-div {}
 #bestemming-options-div {}
-#date-input {margin-left: 20px; height: 40px; border-radius: 10px; font-size: 1.25rem; display: inline-block;}
+.date-input {margin-left: 20px; height: 40px; border-radius: 10px; font-size: 1.25rem; display: inline-block;}
 .passagiers-input {font-size: 1rem; padding-left: 10px; width: 40px; margin-left: 40px; height: 30px; border-radius: 10px;}
 #passagiers-div span {}
 #passagiers-div div p {font-weight: bold; margin-left: 20px; font-size: 1rem; color: #4d4d4d;}
