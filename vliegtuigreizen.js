@@ -13,15 +13,43 @@ function get_airports() {
   .then(data => {
     console.log(data)
     window.airports_data_dict = {}
+    window.airports_data_dict2 = {}
+    var country_list = []
+    var country_codes_list = []
+    var country_continent_list = []
+
     for (i = 0; i < data["locations"].length; i++) {
       var airport = data["locations"][i]
+
+      if (country_list.includes(airport["city"]["country"]["name"]) == false) {
+        country_list.push(airport["city"]["country"]["name"]);
+        country_codes_list.push(airport["city"]["country"]["code"]);
+        country_continent_list.push(airport["city"]["continent"]["name"]);
+      }
+
       window.airports_data_dict[airport["id"]] = {
           "name": airport["name"],
           "city": airport["city"]["name"],
           "continent": airport["city"]["continent"]["name"],
           "country": airport["city"]["country"]["name"]}
     }
-    console.log(window.airports_data_dict)
+
+    for (n in country_list) {
+      window.airports_data_dict[country_codes_list[n]] = {
+          "name": "",
+          "city": "",
+          "continent": country_continent_list[n],
+          "country": country_list[n]}
+    }
+
+
+
+    console.log(window.airports_data_dict);
+    //console.log(window.airports_data_dict2);
+    console.log(country_list);
+    console.log(country_codes_list);
+    console.log(country_continent_list);
+
   })
   .catch(error => console.log(error))
 }
