@@ -1,0 +1,74 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.div1 {margin-top: 100px; margin-left: 3.5% ;position: relative; }
+
+#list_div {text-align: center;}
+#options-div {margin-left: 37.5%; width: 26%;}
+h2 {font-weight: bold; font-size: 1.75rem; color: #4d4d4d; margin-bottom: 15%;}
+
+.a {font-weight: bold; font-size: 1.2rem; color: #4d4d4d; padding: 10px; width: 10%; background-color: #fc0; text-decoration: none; border-radius: 10px;}
+.a1 {color: white;}
+.a:hover {background-color: #e9bb01;}
+.bottom-div p {font-size: 1.5rem; padding: 10px 0 10px 10px; margin: 0px; color: white;}
+
+.add_btn {font-weight: bold; font-size: 1.2rem; color: #4d4d4d; padding: 10px; width: 10%; background-color: #fc0; text-decoration: none; border-radius: 10px;}
+.add_btn:hover {background-color: #e9bb01;}
+
+.save_btn {display: inline-block; font-weight: bold; font-size: 1.2rem; color: white; padding: 10px; width: 10%; background-color: #666666; text-decoration: none; border-radius: 10px;}
+.save_btn:hover {background-color: #464646;}
+
+.delete_btn {color: #ff0000; background-image: url("images/bin.png"); background-repeat: no-repeat; background-position: center; background-size: 22%; background-color: #ff0000; display: inline-block; font-weight: bold; font-size: 1.2rem; padding: 10px; width: 10%; text-decoration: none; border-radius: 10px;}
+.delete_btn:hover {color: #d11f1f; background: #d11f1f; background-image: url("images/bin.png"); background-size: 25%; background-repeat: no-repeat; background-position: center;}
+
+.plaats_input {font-size: 1.75rem; border-radius: 10px; margin-left: 20px; display: inline-block; width: 26%; height: 40px;}
+
+.options-div {
+  background: white;
+  border-style: solid;
+  margin-left: 20px;
+  overflow-y:auto;
+  position: absolute;
+  width: 220px;
+  text-align: left;
+}
+
+.list-item {
+  color: black;
+}
+.list-item:hover {
+  color: blue;
+}
+
+.menu {
+  border-bottom-style: solid;
+  width: 100%;
+  height: 46px;
+  position: fixed;
+  margin: 0;
+  top:0;
+  left:0;
+  background-color: #4d4d4d;
+}
+
+.menu a {display: inline-block; color: white; text-decoration: none; font-size: 1.35rem; padding: 16px 2.5% 5px 2.5%}
+.menu a:hover {background: grey;}
+.menu span {background: grey; display: inline-block; color: white; text-decoration: none; font-size: 1.35rem; padding: 16px 2.5% 5px 2.5%}
+
+.menu h1 {display: inline-block; margin-right: 5%;}
+
+.titel {font-weight: bold; font-size: 2.3rem; margin-bottom: 5%; font-family: cursive; text-align: center;}
+
+
+.title {font-weight: bold; font-size: 1.75rem; padding: 10px 0 10px 30px; margin: 0; text-decoration: none; color: white}
+.img1 {width:100%; border: none; margin: 0; margin-bottom: 20px; position: relative; top: 40px;}
+.img2 {width: 100%; border-radius: 20px;}
+.img-div {width: 42%; display: inline-block;}
+.img2-div {width: 42%; display: inline-block; margin-left: 6%;}
+.title1-1 {font-weight: bold; font-size: 1.75rem; padding: 10px 0 0px 10px; margin: 0; text-decoration: none;}
+.bottom-div {margin:0; background-color: #4d4d4d; text-align: center; height: auto; border-top-style: solid;}
+
+.terug-div {text-align: center;}
+.terug-div a {font-size: 2rem; padding: 5px 5%;}
