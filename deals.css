@@ -25,6 +25,11 @@ h2 {font-weight: bold; font-size: 1.75rem; color: #4d4d4d; margin-bottom: 15%;}
   background-color: #4d4d4d;
 }
 
+.menu a {display: inline-block; color: white; text-decoration: none; font-size: 1.35rem; padding: 16px 2.5% 5px 2.5%}
+.menu a:hover {background: grey;}
+
+.menu h1 {display: inline-block; margin-right: 5%;}
+
 .title {font-weight: bold; font-size: 1.75rem; padding: 10px 0px 10px 30px; margin: 0; text-decoration: none; color: white}
 .img1 {width: 100%; border: none; margin: 0; margin-bottom: 20px; position: relative; top: 40px;}
 .title1-1 {color: white; font-weight: bold; font-size: 1.75rem; padding: 10px 0 0px 10px; margin: 0; text-decoration: none;}
@@ -44,6 +49,8 @@ h2 {font-weight: bold; font-size: 1.75rem; color: #4d4d4d; margin-bottom: 15%;}
 #passagiers-div div p {font-weight: bold; margin-left: 20px; font-size: 1rem; color: #4d4d4d;}
 select {margin-left: 20px; font-size: 1rem; height: 40px; border-radius: 10px;}
 #overal-option p {font-weight: bold; text-decoration: underline;}
+#overal-option2 p {text-decoration: underline;}
+
 
 .price {font-weight: bold; font-size: 1.5rem; color: #4d4d4d; padding: 10px; background-color: #fc0; text-decoration: none; border-radius: 10px; margin: 10px 0; display: inline-block;}
 .price2 {font-weight: bold; display: inline; color: black;}
