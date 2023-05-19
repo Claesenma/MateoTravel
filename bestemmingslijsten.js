@@ -101,7 +101,7 @@ function load_page3(gebruikersnaam, wachtwoord) {
 
   var list_div = document.getElementById("list_div");
 
-  bestemmingslijst = string_to_list(window.users["data"]["Claesenma"]["bestemmingslijst"]);
+  bestemmingslijst = string_to_list(window.users["data"][gebruikersnaam]["bestemmingslijst"]);
   console.log(bestemmingslijst);
 
   if (bestemmingslijst.length == 0) {
