@@ -8,8 +8,9 @@ console.log(queryString);
 //window.ingelogd = false;
 
 const urlParams = new URLSearchParams(queryString);
-var wachtwoord = urlParams.get('wachtwoord')
-var gebruikersnaam = urlParams.get('gebruikersnaam')
+var wachtwoord = urlParams.get('wachtwoord');
+var gebruikersnaam = urlParams.get('gebruikersnaam');
+window.gebruikernsaam = gebruikersnaam;
 if (gebruikersnaam == null && wachtwoord != null) {
   window.location.replace("index.html");
 }
@@ -477,7 +478,7 @@ function get_flights(ve, be, da1, da2, t1, t2, ov1, ov2, mu, st) {
 
 
   if (be == "FAVORIETE BESTEMMINGEN") {
-    bestemmingslijst = string_to_list(window.users["data"]["Claesenma"]["bestemmingslijst"]);
+    bestemmingslijst = string_to_list(window.users["data"][window.gebruikersnaam]["bestemmingslijst"]);
 
     var error = false;
     if (bestemmingslijst.length == 0) {
