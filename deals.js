@@ -10,7 +10,7 @@ console.log(queryString);
 const urlParams = new URLSearchParams(queryString);
 var wachtwoord = urlParams.get('wachtwoord');
 var gebruikersnaam = urlParams.get('gebruikersnaam');
-window.gebruikernsaam = gebruikersnaam;
+window.gebruikersnaam = gebruikersnaam;
 if (gebruikersnaam == null && wachtwoord != null) {
   window.location.replace("index.html");
 }
